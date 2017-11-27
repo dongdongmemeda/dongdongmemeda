@@ -21,7 +21,11 @@ canvas.width = WIDTH
 canvas.height = HEIGHT
 const context = canvas.getContext('2d')
 context.fillStyle = 'rgba(0,0,0,0.25)'
-const POINT = 35, maxR = 15, minR = 5
+const maxR = 15, minR = 5
+let POINT = 35
+if(window.innerWidth<780){
+    POINT = 15
+}
 let circleArr = []
 //  定义一个圆
 function Circle(x, y, r, moveX, moveY){
