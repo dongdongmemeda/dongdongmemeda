@@ -39,23 +39,13 @@ function Circle(x, y, r, moveX, moveY){
 }
 //  画圆
 function drawCircle(ctx, x, y, r){
-    const circle = new Circle(x, y, r, 0, 0)
     ctx.beginPath()
-    ctx.arc(circle.x, circle.y, circle.r, 0, 2*Math.PI)
+    ctx.arc(x, y, r, 0, 2*Math.PI)
     ctx.closePath()
     ctx.fill()
 }
-//  定义线条
-function Line(x1, y1, x2, y2, o){
-    this.x1 = x1
-    this.y1 = y1
-    this.x2 = x2
-    this.y2 = y2
-    this.o = o
-}
 //  画线条
 function drawLine(ctx, x1, y1, x2, y2, o){
-    const line = new Line(x1, y1, x2, y2, o)
     ctx.beginPath()
     ctx.strokeStyle = `rgba(0, 0, 0, ${o})`
     ctx.moveTo(x1, y1)
