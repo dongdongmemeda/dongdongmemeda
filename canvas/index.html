@@ -87,15 +87,13 @@ function draw(){
         else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
 
         drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r)
-        for(let j=0;j<POINT;j++){
-            if(i+j<POINT){
+        for(let j=0;j<POINT-i;j++){
                 const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
                       B = Math.abs(circleArr[i+j].y - circleArr[i].y),
                       lineLength = Math.sqrt(A*A + B*B),
                       C = POINT/lineLength-0.05,
                       lineOpacity = C > 0.15 ? 0.15 : C
                 drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
-            }
         }
     }
 }
