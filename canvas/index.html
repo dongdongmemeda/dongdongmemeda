@@ -83,7 +83,9 @@ function draw(){
                       lineLength = Math.sqrt(A*A + B*B),
                       C = POINT/lineLength-0.05,
                       lineOpacity = C > 0.15 ? 0.15 : C
-                drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
+                if(lineOpacity>0){
+                    drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
+                }
         }
     }
 }
