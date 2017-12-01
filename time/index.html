@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <title>Timer</title>
     <style>
         body{overflow: hidden;background-color: #F7FAFC;margin: 0;}#canvas{display: inline-block;}
@@ -15,181 +14,164 @@
 /**
  * author: 蔡东
  * github: https://github.com/dongdongmemeda
- * createdOn: 2017/12/1
+ * createdOn: 2017/11/27
 */
 const csl = 
 `%c/**
 * author: 蔡东
 * github: https://github.com/dongdongmemeda
-* createdOn: 2017/12/1
+* createdOn: 2017/11/27
 */
 `
 console.log(csl,'color: red;')
-    const zero = 
-    [
-        [1,1,1],
-        [1,0,1],
-        [1,0,1],
-        [1,0,1],
-        [1,1,1]
-    ],one = 
-    [
-        [1,1,0],
-        [0,1,0],
-        [0,1,0],
-        [0,1,0],
-        [1,1,1]
-    ],two = 
-    [
-        [1,1,1],
-        [0,0,1],
-        [1,1,1],
-        [1,0,0],
-        [1,1,1]
-    ],three = 
-    [
-        [1,1,1],
-        [0,0,1],
-        [1,1,1],
-        [0,0,1],
-        [1,1,1]
-    ],four = 
-    [
-        [1,0,1],
-        [1,0,1],
-        [1,1,1],
-        [0,0,1],
-        [0,0,1]
-    ],five = 
-    [
-        [1,1,1],
-        [1,0,0],
-        [1,1,1],
-        [0,0,1],
-        [1,1,1]
-    ],six = 
-    [
-        [1,1,1],
-        [1,0,0],
-        [1,1,1],
-        [1,0,1],
-        [1,1,1]
-    ],seven = 
-    [
-        [1,1,1],
-        [0,0,1],
-        [0,0,1],
-        [0,0,1],
-        [0,0,1]
-    ],eight = 
-    [
-        [1,1,1],
-        [1,0,1],
-        [1,1,1],
-        [1,0,1],
-        [1,1,1]
-    ],nine = 
-    [
-        [1,1,1],
-        [1,0,1],
-        [1,1,1],
-        [0,0,1],
-        [1,1,1]
-    ],point = 
-    [
-        [0,0,0],
-        [0,1,0],
-        [0,0,0],
-        [0,1,0],
-        [0,0,0]
-    ];
-    const num = [zero, one, two, three, four, five, six, seven, eight, nine];
-    const canvas = document.getElementById('canvas'), WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
-    canvas.width = WIDTH;
-    canvas.height = HEIGHT;
-    const context = canvas.getContext("2d");
-    context.fillStyle = 'rgba(0,0,0,0.2)';
-    let pointArr = [];
+const zero = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,0,1],
+    [1,0,1],
+    [1,1,1]
+],one = 
+[
+    [1,1,0],
+    [0,1,0],
+    [0,1,0],
+    [0,1,0],
+    [1,1,1]
+],two = 
+[
+    [1,1,1],
+    [0,0,1],
+    [1,1,1],
+    [1,0,0],
+    [1,1,1]
+],three = 
+[
+    [1,1,1],
+    [0,0,1],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],four = 
+[
+    [1,0,1],
+    [1,0,1],
+    [1,1,1],
+    [0,0,1],
+    [0,0,1]
+],five = 
+[
+    [1,1,1],
+    [1,0,0],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],six = 
+[
+    [1,1,1],
+    [1,0,0],
+    [1,1,1],
+    [1,0,1],
+    [1,1,1]
+],seven = 
+[
+    [1,1,1],
+    [0,0,1],
+    [0,0,1],
+    [0,0,1],
+    [0,0,1]
+],eight = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,1,1],
+    [1,0,1],
+    [1,1,1]
+],nine = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],point = 
+[
+    [0,0,0],
+    [0,1,0],
+    [0,0,0],
+    [0,1,0],
+    [0,0,0]
+],full = 
+[
+    [1,1,1],
+    [1,1,1],
+    [1,1,1],
+    [1,1,1],
+    [1,1,1]
+];
+const num = [zero, one, two, three, four, five, six, seven, eight, nine];
+const canvas = document.getElementById('canvas'), WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+const context = canvas.getContext("2d");
+let color = '#334455', pointColor = '#BD2D30';
+let pointArr = [], fullArr = [];
+dps(point, full, pointArr, fullArr, pointColor, pointColor);
+window.onload = function(){
+    setInterval(function(){
+        init();
+    }, 1000);
+}
+function Rect(x, y, color){
+    this.x = x;
+    this.y = y;
+    this.color = color;
+}
+function drawRect(ctx, x, y, color){
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, 20, 20);
+    ctx.closePath();
+    ctx.fill();
+}
+function init(){
+    const date = new Date();
+    let h = date.getHours(), m = date.getMinutes(), s = date.getSeconds();
+    h = h<10? '0'+h : ''+h
+    m = m<10? '0'+m : ''+m
+    s = s<10? '0'+s : ''+s
+
+    let hdata1 = [], hdata2 = [], mdata1 = [], mdata2 = [], sdata1 = [], sdata2 = [];
+    let hr = h.split(''), hfirst = num[+hr[0]], hsecond = num[+hr[1]];
+    let mr = m.split(''), mfirst = num[+mr[0]], msecond = num[+mr[1]];
+    let sr = s.split(''), sfirst = num[+sr[0]], ssecond = num[+sr[1]];
+
+    dps(hfirst, hsecond, hdata1, hdata2, color, color);
+    dps(mfirst, msecond, mdata1, mdata2, color, color);
+    dps(sfirst, ssecond, sdata1, sdata2, color, color);        
+
+    context.clearRect(0, 0 , canvas.width, canvas.height);
+    let destArr = [hdata1, hdata2, pointArr, mdata1, mdata2, pointArr, sdata1, sdata2];
+    for(let i=0;i<destArr.length;i++){
+        for(let j=0;j<destArr[i].length;j++){
+            drawRect(context, destArr[i][j].x + 80*i, destArr[i][j].y, destArr[i][j].color)
+        }
+    }
+}
+function dps(first, second, data1, data2, color1, color2){
     for(let i=0;i<5;i++){
         for(let j=0;j<3;j++){
-            if(point[i][j] === 1){
-                const rect = new Rect(j*22+20, i*22+20)
-                pointArr.push(rect)
+            if(first[i][j] === 1){
+                const rect = new Rect(j*22+20, i*22+20, color1)
+                data1.push(rect)
+            }
+            if(second[i][j] === 1){
+                const rect = new Rect(j*22+20, i*22+20, color2)
+                data2.push(rect)
             }
         }
     }
-    window.onload = function(){
-        setInterval(function(){
-            init();
-        }, 1000);
-    }
-    function Rect(x, y){
-        this.x = x
-        this.y = y
-    }
-    function drawRect(ctx, x, y){
-        ctx.beginPath();
-        ctx.fillRect(x, y, 20, 20);
-        ctx.closePath();
-        ctx.fill();
-    }
-    function init(){
-        const date = new Date();
-        let h = date.getHours(), m = date.getMinutes(), s = date.getSeconds();
-        h = h<10? '0'+h : ''+h
-        m = m<10? '0'+m : ''+m
-        s = s<10? '0'+s : ''+s
-        let hdata1 = [], hdata2 = [], mdata1 = [], mdata2 = [], sdata1 = [], sdata2 = [];
-        let hr = h.split(''), hfirst = num[+hr[0]], hsecond = num[+hr[1]];
-        dps(hfirst, hsecond, hdata1, hdata2);
-        let mr = m.split(''), mfirst = num[+mr[0]], msecond = num[+mr[1]];
-        dps(mfirst, msecond, mdata1, mdata2);
-        let sr = s.split(''), sfirst = num[+sr[0]], ssecond = num[+sr[1]];
-        
-        dps(sfirst, ssecond, sdata1, sdata2);
-        context.clearRect(0, 0 , canvas.width, canvas.height)
-        draw(hdata1,hdata2,mdata1,mdata2,sdata1,sdata2);
-    }
-    function dps(first, second, data1, data2){
-        for(let i=0;i<5;i++){
-            for(let j=0;j<3;j++){
-                if(first[i][j] === 1){
-                    const rect = new Rect(j*22+20, i*22+20)
-                    data1.push(rect)
-                }
-                if(second[i][j] === 1){
-                    const rect = new Rect(j*22+20, i*22+20)
-                    data2.push(rect)
-                }
-            }
-        }
-    }
-    function draw(hdata1, hdata2, mdata1, mdata2, sdata1, sdata2){
-        for(let i=0;i<hdata1.length;i++){
-            drawRect(context, hdata1[i].x, hdata1[i].y)
-        }
-        for(let i=0;i<hdata2.length;i++){
-            drawRect(context, hdata2[i].x+80, hdata2[i].y)
-        }
-        for(let i=0;i<pointArr.length;i++){
-            drawRect(context, pointArr[i].x+160, pointArr[i].y)
-        }
-        for(let i=0;i<mdata1.length;i++){
-            drawRect(context, mdata1[i].x+240, mdata1[i].y)
-        }
-        for(let i=0;i<mdata2.length;i++){
-            drawRect(context, mdata2[i].x+320, mdata2[i].y)
-        }
-        for(let i=0;i<pointArr.length;i++){
-            drawRect(context, pointArr[i].x+400, pointArr[i].y)
-        }
-        for(let i=0;i<sdata1.length;i++){
-            drawRect(context, sdata1[i].x+480, sdata1[i].y)
-        }
-        for(let i=0;i<sdata2.length;i++){
-            drawRect(context, sdata2[i].x+560, sdata2[i].y)
-        }
-    }
+}
 </script>
 </body>
 </html>
