@@ -16,6 +16,14 @@
  * github: https://github.com/dongdongmemeda
  * createdOn: 2017/11/27
 */
+const csl = 
+`%c/**
+* author: 蔡东
+* github: https://github.com/dongdongmemeda
+* createdOn: 2017/11/27
+*/
+`
+console.log(csl,'color: red;')
 const canvas = document.querySelector('#canvas'), WIDTH = window.innerWidth, HEIGHT = window.innerHeight
 canvas.width = WIDTH
 canvas.height = HEIGHT
@@ -95,14 +103,6 @@ window.onload = function(){
     setInterval(function(){
         draw()
     }, 16)
-    const csl = 
-`%c/**
-* author: 蔡东
-* github: https://github.com/dongdongmemeda
-* createdOn: 2017/11/27
-*/
-`
-    console.log(csl,'color: red;')
 }
 </script>
 </body>
