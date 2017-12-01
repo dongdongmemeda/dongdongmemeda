@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Timer</title>
+    <style>
+        body{overflow: hidden;background-color: #F7FAFC;margin: 0;}#canvas{display: inline-block;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+<script>
+/**
+ * author: 蔡东
+ * github: https://github.com/dongdongmemeda
+ * createdOn: 2017/12/1
+*/
+const csl = 
+`%c/**
+* author: 蔡东
+* github: https://github.com/dongdongmemeda
+* createdOn: 2017/12/1
+*/
+`
+console.log(csl,'color: red;')
+const zero = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,0,1],
+    [1,0,1],
+    [1,1,1]
+],one = 
+[
+    [1,1,0],
+    [0,1,0],
+    [0,1,0],
+    [0,1,0],
+    [1,1,1]
+],two = 
+[
+    [1,1,1],
+    [0,0,1],
+    [1,1,1],
+    [1,0,0],
+    [1,1,1]
+],three = 
+[
+    [1,1,1],
+    [0,0,1],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],four = 
+[
+    [1,0,1],
+    [1,0,1],
+    [1,1,1],
+    [0,0,1],
+    [0,0,1]
+],five = 
+[
+    [1,1,1],
+    [1,0,0],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],six = 
+[
+    [1,1,1],
+    [1,0,0],
+    [1,1,1],
+    [1,0,1],
+    [1,1,1]
+],seven = 
+[
+    [1,1,1],
+    [0,0,1],
+    [0,0,1],
+    [0,0,1],
+    [0,0,1]
+],eight = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,1,1],
+    [1,0,1],
+    [1,1,1]
+],nine = 
+[
+    [1,1,1],
+    [1,0,1],
+    [1,1,1],
+    [0,0,1],
+    [1,1,1]
+],point = 
+[
+    [0,0,0],
+    [0,1,0],
+    [0,0,0],
+    [0,1,0],
+    [0,0,0]
+],full = 
+[
+    [1,1,1],
+    [1,1,1],
+    [1,1,1],
+    [1,1,1],
+    [1,1,1]
+];
+const num = [zero, one, two, three, four, five, six, seven, eight, nine];
+const canvas = document.getElementById('canvas'), WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+const context = canvas.getContext("2d");
+let pointColor = '#BD2D30', color = '#334455';
+let pointArr = [], fullArr = [];
+dps(point, full, pointArr, fullArr, pointColor, '#999');
+window.onload = function(){
+    setInterval(function(){
+        init();
+    }, 1000);
+}
+function Rect(x, y, color){
+    this.x = x;
+    this.y = y;
+    this.color = color;
+}
+function drawRect(ctx, x, y, color){
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, 20, 20);
+    ctx.closePath();
+    ctx.fill();
+}
+function init(){
+    const date = new Date();
+    let h = date.getHours(), m = date.getMinutes(), s = date.getSeconds();
+    h = h<10? '0'+h : ''+h
+    m = m<10? '0'+m : ''+m
+    s = s<10? '0'+s : ''+s
+
+    let hdata1 = [], hdata2 = [], mdata1 = [], mdata2 = [], sdata1 = [], sdata2 = [];
+    let hr = h.split(''), hfirst = num[+hr[0]], hsecond = num[+hr[1]];
+    let mr = m.split(''), mfirst = num[+mr[0]], msecond = num[+mr[1]];
+    let sr = s.split(''), sfirst = num[+sr[0]], ssecond = num[+sr[1]];
+
+    dps(hfirst, hsecond, hdata1, hdata2, color, color);
+    dps(mfirst, msecond, mdata1, mdata2, color, color);
+    dps(sfirst, ssecond, sdata1, sdata2, color, color);        
+
+    setTimeout(function(){
+        context.clearRect(0, 0 , canvas.width, canvas.height);
+        let newArr = []
+        if(+sr[1] < 9){
+            newArr = [hdata1, hdata2, pointArr, mdata1, mdata2, pointArr, sdata1, fullArr];
+        }else{
+            newArr = [hdata1, hdata2, pointArr, mdata1, mdata2, pointArr, fullArr, fullArr];
+            if(+sr[0] == 5){
+                if(+mr[1] < 9){
+                    newArr = [hdata1, hdata2, pointArr, mdata1, fullArr, pointArr, fullArr, fullArr];
+                }else{
+                    newArr = [hdata1, hdata2, pointArr, fullArr, fullArr, pointArr, fullArr, fullArr];
+                    if(+mr[0] == 5){
+                        if(+hr[1] < 9){
+                            newArr = [hdata1, fullArr, pointArr, mdatafullArr1, fullArr, pointArr, fullArr, fullArr];
+                        }else{
+                            newArr = [fullArr, fullArr, pointArr, fullArr, fullArr, pointArr, fullArr, fullArr];
+                        }
+                    }
+                }
+            }
+        }
+        for(let i=0;i<newArr.length;i++){
+                for(let j=0;j<newArr[i].length;j++){
+                    drawRect(context, newArr[i][j].x + 80*i, newArr[i][j].y, newArr[i][j].color)
+                }
+            }
+    }, 500)
+    context.clearRect(0, 0 , canvas.width, canvas.height);
+    let destArr = [hdata1, hdata2, pointArr, mdata1, mdata2, pointArr, sdata1, sdata2];
+    for(let i=0;i<destArr.length;i++){
+        for(let j=0;j<destArr[i].length;j++){
+            drawRect(context, destArr[i][j].x + 80*i, destArr[i][j].y, destArr[i][j].color)
+        }
+    }
+}
+function dps(first, second, data1, data2, color1, color2){
+    for(let i=0;i<5;i++){
+        for(let j=0;j<3;j++){
+            if(first[i][j] === 1){
+                const rect = new Rect(j*22+20, i*22+20, color1)
+                data1.push(rect)
+            }
+            if(second[i][j] === 1){
+                const rect = new Rect(j*22+20, i*22+20, color2)
+                data2.push(rect)
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>
