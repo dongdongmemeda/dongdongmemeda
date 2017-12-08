@@ -63,7 +63,7 @@ function mkDiv(id, left, top, width, height, WebkitTransform, opacity, backgroun
 // 			let w = (pic.offsetWidth/cols) | 0 , h = (pic.offsetHeight/rows) | 0;
 // 			let WebkitTransform = 'translate3d(0,0,0)';
 // 			let backgroundPosition = '-' + j*w + 'px -' + i*h + 'px';
-// 			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+2+'px', h+2+'px', WebkitTransform, 1, backgroundPosition)
+// 			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+10+'px', h+10+'px', WebkitTransform, 1, backgroundPosition)
 // 		}
 // 	}
 // }
@@ -77,7 +77,7 @@ function showPic(){
 						disX + 'px, ' + disY + 'px, 600px) rotateY(' + rnd(-180, 180) +
 						'deg) rotateX(' + rnd(-180, 180) + 'deg) scale(2,2)';
 			let backgroundPosition = '-' + j*w + 'px -' + i*h + 'px';
-			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+2+'px', h+2+'px', WebkitTransform, 0, backgroundPosition)
+			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+10+'px', h+10+'px', WebkitTransform, 0, backgroundPosition)
 		}
 	}
 	picBack();
