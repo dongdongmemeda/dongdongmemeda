@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>pic</title>
 <style>
 body {overflow:hidden;}
@@ -14,8 +13,8 @@ body {overflow:hidden;}
 	bottom: 0;
 	right: 0;
 	margin: auto;
-	width: 600px;
-	height: 400px;
+	width: 800px;
+	height: 600px;
 	cursor: pointer;
 	transform-style:preserve-3d;
 	-webkit-transform-style:preserve-3d;
@@ -23,7 +22,7 @@ body {overflow:hidden;}
 #pic div {
 	position: absolute;
 	background: url('./ad.jpg') no-repeat;
-	background-size: 600px auto;
+	background-size: 800px auto;
 	transition: 0.6s all ease;
 	-webkit-transition: 0.6s all ease;
 	transform:translate(0,0) translateZ(0) scale(1,1) rotateX(0deg) rotateY(0deg);
@@ -35,7 +34,7 @@ body {overflow:hidden;}
 	<div id="pic"></div>
 <script>
 const pic = document.getElementById('pic') ;
-const rows = 10, cols = 10, picCX = pic.offsetWidth/2, picCY = pic.offsetHeight/2;
+const rows = 3, cols = 3, picCX = pic.offsetWidth/2, picCY = pic.offsetHeight/2;
 window.onload = function (){
 	// mkPic();
 	showPic();
