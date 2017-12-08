@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<title>pic</title>
+<style>
+body {overflow:hidden;}
+#pic {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	width: 800px;
+	height: 600px;
+	cursor: pointer;
+	transform-style:preserve-3d;
+	-webkit-transform-style:preserve-3d;
+}
+#pic div {
+	position: absolute;
+	background: url('./ad.jpg') no-repeat;
+	background-size: 800px auto;
+	transition: 0.6s all ease;
+	-webkit-transition: 0.6s all ease;
+	transform:translate(0,0) translateZ(0) scale(1,1) rotateX(0deg) rotateY(0deg);
+	-webkit-transform:translate(0,0) translateZ(0) scale(1,1) rotateX(0deg) rotateY(0deg);
+}
+</style>
+</head>
+<body>
+	<div id="pic"></div>
+<script>
+const pic = document.getElementById('pic') ;
+const rows = 10, cols = 10, picCX = pic.offsetWidth/2, picCY = pic.offsetHeight/2;
+window.onload = function (){
+	// mkPic();
+	showPic();
+	pic.onclick = function (){
+		picGo();
+		setTimeout(function (){
+			picBack();
+		}, 800);
+	}
+}
+function mkDiv(id, left, top, width, height, WebkitTransform, opacity, backgroundPosition){
+	let div = document.createElement('div')
+	div.id = id;
+	div.style.left = left;
+	div.style.top = top;
+	div.style.width = width;
+	div.style.height = height;
+	div.style.WebkitTransform = WebkitTransform;
+	div.style.opacity = opacity;
+	div.style.backgroundPosition = backgroundPosition;
+	pic.appendChild(div);
+}
+// function mkPic(){
+// 	for(let i=0;i<rows;i++){
+// 		for(let j=0;j<cols;j++){
+// 			let w = (pic.offsetWidth/cols) | 0 , h = (pic.offsetHeight/rows) | 0;
+// 			let WebkitTransform = 'translate3d(0,0,0)';
+// 			let backgroundPosition = '-' + j*w + 'px -' + i*h + 'px';
+// 			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+'px', h+'px', WebkitTransform, 1, backgroundPosition)
+// 		}
+// 	}
+// }
+function showPic(){
+	for(let i=0;i<rows;i++){
+		for(let j=0;j<cols;j++){
+			let w = (pic.offsetWidth/cols) | 0 , h = (pic.offsetHeight/rows) | 0;
+			let l = j*w + w/2, t = i*h + h/2;
+			let disX = l - picCX, disY = t - picCY;	
+			let WebkitTransform = 'perspective(800px) translate3d(' + 
+						disX + 'px, ' + disY + 'px, 600px) rotateY(' + rnd(-180, 180) +
+						'deg) rotateX(' + rnd(-180, 180) + 'deg) scale(2,2)';
+			let backgroundPosition = '-' + j*w + 'px -' + i*h + 'px';
+			mkDiv('new_'+i+'_'+j, j*w+'px', i*h+'px', w+'px', h+'px', WebkitTransform, 0, backgroundPosition)
+		}
+	}
+	picBack();
+}
+function picGo(){
+	for(let i=0; i<rows; i++){
+		for(let j=0; j<cols; j++){
+			let div = document.getElementById('new_' + i + '_' + j);
+			//飞走——跟中心的距离——方向
+			let l = div.offsetLeft + div.offsetWidth/2, t = div.offsetTop + div.offsetHeight/2;
+			let disX = l - picCX, disY = t - picCY;
+			setTimeout(function(){
+				div.style.WebkitTransform = 'perspective(800px) translate3d(' + 
+							disX + 'px, ' + disY + 'px, 600px) rotateY(' + rnd(-180, 180) +
+							'deg) rotateX(' + rnd(-180, 180) + 'deg) scale(2,2)';
+				div.style.opacity = 0;
+			}, rnd(1, 301));
+		}
+	}
+}
+function picBack(){
+	for(let i=0;i<rows;i++){
+		for(let j=0;j<cols;j++){
+			let div = document.getElementById('new_' + i + '_' + j);
+			let w = (pic.offsetWidth/cols) | 0 , h = (pic.offsetHeight/rows) | 0;
+			let offsetLeft = j*w, offsetTop = i*h;
+			let l = offsetLeft + w/2, t = offsetTop + h/2;
+			let disX = l - picCX, disY = t - picCY;
+			div.style.WebkitTransform = 'perspective(800px) translate3d(' + 
+						disX + 'px, ' + disY + 'px, 600px) rotateY(' + rnd(-180, 180) +
+						'deg) rotateX(' + rnd(-180, 180) + 'deg) scale(2,2)';
+			div.style.opacity = 0;
+			div.style.backgroundPosition = '-' + offsetLeft + 'px -' + offsetTop + 'px';
+			//飞来——跟中心的距离——方向
+			setTimeout(function (){
+				div.style.WebkitTransform = 'translate3d(0,0,0)';
+				div.style.opacity = 1;
+			}, rnd(1, 301));
+		}
+	}
+}
+function rnd(n, m){
+	return (Math.random()*(m-n)+n) | 0;
+}
+</script>
+</body>
+</html>
