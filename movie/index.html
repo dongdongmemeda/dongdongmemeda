@@ -40,11 +40,22 @@ window.onload = window.onresize = function(){
             clearCanvas();
             context.fillStyle = 'rgba(255,255,255,0.5)';
             setTimeout(function(){
-                for(let i=0;i<POINT;i++){
-                    drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
-                }
+                let tom = setInterval(function(){
+                    clearCanvas();
+                    for(let i=0;i<POINT;i++){
+                        circleArr[i].x += circleArr[i].moveX
+                        circleArr[i].y += circleArr[i].moveY
+                        if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
+                        else if(circleArr[i].x<0){ circleArr[i].x = WIDTH }
+                        if(circleArr[i].y>HEIGHT){ circleArr[i].y = 0 }
+                        else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
+
+                        drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
+                    }
+                }, 20);
                 setTimeout(function(){
-                    let tom = setInterval(function(){
+                    clearInterval(tom)
+                    setInterval(function(){
                         clearCanvas();
                         for(let i=0;i<POINT;i++){
                             circleArr[i].x += circleArr[i].moveX
@@ -55,35 +66,19 @@ window.onload = window.onresize = function(){
                             else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
 
                             drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
-                        }
-                    }, 20);
-                    setTimeout(function(){
-                        clearInterval(tom)
-                        setInterval(function(){
-                            clearCanvas();
-                            for(let i=0;i<POINT;i++){
-                                circleArr[i].x += circleArr[i].moveX
-                                circleArr[i].y += circleArr[i].moveY
-                                if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
-                                else if(circleArr[i].x<0){ circleArr[i].x = WIDTH }
-                                if(circleArr[i].y>HEIGHT){ circleArr[i].y = 0 }
-                                else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
-
-                                drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
-                                for(let j=0;j<POINT-i;j++){
-                                    const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
-                                        B = Math.abs(circleArr[i+j].y - circleArr[i].y),
-                                        lineLength = Math.sqrt(A*A + B*B),
-                                        C = POINT/lineLength-0.2,
-                                        lineOpacity = C > 0.15 ? 0.15 : C
-                                    if(lineOpacity>0){
-                                        drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
-                                    }
+                            for(let j=0;j<POINT-i;j++){
+                                const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
+                                    B = Math.abs(circleArr[i+j].y - circleArr[i].y),
+                                    lineLength = Math.sqrt(A*A + B*B),
+                                    C = POINT/lineLength-0.1,
+                                    lineOpacity = C > 0.15 ? 0.15 : C
+                                if(lineOpacity>0){
+                                    drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
                                 }
                             }
-                        }, 20);
-                    }, 500);
-                }, 500);
+                        }
+                    }, 20);
+                }, 1000);
             }, 500);
         }, 3000);
     }
