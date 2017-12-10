@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Movie-ES5</title>
+    <title>Movie</title>
 <style>
 body{overflow: hidden;margin: 0;padding: 0;}
 #canvas{background-color: #334455;transition: all 0.5s;}
@@ -17,13 +17,13 @@ border-bottom: 50px solid transparent;cursor: pointer;}
         <div id="pause"></div>
     </div>
 <script>
-const canvas = document.getElementById('canvas'), pause = document.getElementById('pause');
-const WIDTH = window.innerWidth, HEIGHT = window.innerHeight, CW = parseInt(WIDTH)/2, CY = parseInt(HEIGHT)/2;
+var canvas = document.getElementById('canvas'), pause = document.getElementById('pause');
+var WIDTH = window.innerWidth, HEIGHT = window.innerHeight, CW = parseInt(WIDTH)/2, CY = parseInt(HEIGHT)/2;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
-const context = canvas.getContext('2d');
-let circleArr = [];
-const maxR = 15, minR = 5, POINT = 30;
+var context = canvas.getContext('2d');
+var circleArr = [];
+var maxR = 15, minR = 5, POINT = 30;
 window.onload = window.onresize = function(){
     init();
     pause.onclick = function(){
@@ -38,9 +38,9 @@ window.onload = window.onresize = function(){
             clearCanvas();
             context.fillStyle = 'rgba(255,255,255,0.5)';
             setTimeout(function(){
-                let tom = setInterval(function(){
+                var tom = setInterval(function(){
                     clearCanvas();
-                    for(let i=0;i<POINT;i++){
+                    for(var i=0;i<POINT;i++){
                         circleArr[i].x += circleArr[i].moveX
                         circleArr[i].y += circleArr[i].moveY
                         if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
@@ -55,23 +55,23 @@ window.onload = window.onresize = function(){
                     clearInterval(tom)
                     setInterval(function(){
                         clearCanvas();
-                        for(let i=0;i<POINT;i++){
-                            circleArr[i].x += circleArr[i].moveX
-                            circleArr[i].y += circleArr[i].moveY
-                            if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
-                            else if(circleArr[i].x<0){ circleArr[i].x = WIDTH }
-                            if(circleArr[i].y>HEIGHT){ circleArr[i].y = 0 }
-                            else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
+                        for(var m=0;m<POINT;m++){
+                            circleArr[m].x += circleArr[m].moveX
+                            circleArr[m].y += circleArr[m].moveY
+                            if(circleArr[m].x>WIDTH){ circleArr[m].x = 0 }
+                            else if(circleArr[m].x<0){ circleArr[m].x = WIDTH }
+                            if(circleArr[m].y>HEIGHT){ circleArr[m].y = 0 }
+                            else if(circleArr[m].y<0){ circleArr[m].y = HEIGHT }
 
-                            drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
-                            for(let j=0;j<POINT-i;j++){
-                                const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
-                                    B = Math.abs(circleArr[i+j].y - circleArr[i].y),
+                            drawCircle(context, circleArr[m].x, circleArr[m].y, circleArr[m].r);
+                            for(var n=0;n<POINT-m;n++){
+                                var A = Math.abs(circleArr[m+n].x - circleArr[m].x),
+                                    B = Math.abs(circleArr[m+n].y - circleArr[m].y),
                                     lineLength = Math.sqrt(A*A + B*B),
                                     C = POINT/lineLength-0.14,
                                     lineOpacity = C > 0.15 ? 0.15 : C
                                 if(lineOpacity>0){
-                                    drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
+                                    drawLine(context, circleArr[m].x, circleArr[m].y, circleArr[m+n].x, circleArr[m+n].y, lineOpacity)
                                 }
                             }
                         }
@@ -82,8 +82,8 @@ window.onload = window.onresize = function(){
     }
 }
 function init(){
-    for(let i=0;i<POINT;i++){
-        let circle = new Circle(num(WIDTH, 0), num(HEIGHT, 0), num(maxR, minR), num(10, -10)/40, num(10, -10)/40);
+    for(var i=0;i<POINT;i++){
+        var circle = new Circle(num(WIDTH, 0), num(HEIGHT, 0), num(maxR, minR), num(10, -10)/40, num(10, -10)/40);
         circleArr.push(circle);
     }  
 }
@@ -92,13 +92,13 @@ function num(max,min){
 }
 function drawNum(str, t){
     setTimeout(function() {
-        let timer = null, size = 20;
+        var timer = null, size = 20;
         setTimeout(function(){
             clearInterval(timer)
         }, 1000)
         timer = setInterval(function(){
             clearCanvas();
-            context.font = `bold ${size}px Lucida Console, "微软雅黑"`;
+            context.font = 'bold '+size+'px Lucida Console, "微软雅黑"';
             context.fillText(str, CW, CY);
             size += 8;
         }, 20)
