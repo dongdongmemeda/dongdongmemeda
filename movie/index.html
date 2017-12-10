@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie</title>
 <style>
@@ -25,7 +25,7 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 const context = canvas.getContext('2d');
 let circleArr = [];
-const maxR = 15, minR = 5, POINT = 36;
+const maxR = 15, minR = 5, POINT = 30;
 window.onload = window.onresize = function(){
     init();
     pause.onclick = function(){
@@ -70,7 +70,7 @@ window.onload = window.onresize = function(){
                                 const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
                                     B = Math.abs(circleArr[i+j].y - circleArr[i].y),
                                     lineLength = Math.sqrt(A*A + B*B),
-                                    C = POINT/lineLength-0.1,
+                                    C = POINT/lineLength-0.14,
                                     lineOpacity = C > 0.15 ? 0.15 : C
                                 if(lineOpacity>0){
                                     drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
