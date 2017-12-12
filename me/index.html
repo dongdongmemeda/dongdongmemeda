@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Girl</title>
+    <style>
+        body{overflow: hidden;background-color: #F7FAFC;margin: 0;}#canvas{display: inline-block;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+<script>
+const str = `YvLLLLvLvLvLvLvvvL7L7v7vvvvL7v7v7Lvv7vvvvLvv7vvvvvvvvLvv7v7vv77777r7i;iiiiii:iiiirirrr77777v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7LvvvLvLvLvv
+j7YLYLLvLvLvLvLvvvvvLvLvvvvvL7L7v7LvL7v7L7v7v7v7Lvv7vvv7v7v7v7vvvvJjUU51k251S2UvL7riiii:ii;r7r7777v7v7v7v7v7v7v7v7v7v7v7v7v7vvv7v7v7vvv7v7v7vvv7LvLvL7
+YvLLvLvLvLvLvLvvvvvLvLvvvL7v7L7vvv7vvvvvvv7v7vvvvL7v7v7v77r7YuuUU08MOBB@@@B@B@B@B@B@B@GXuLr;iiirr7777v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvL7L7LvLL7
+J7YvLvLvLvLvLvvvLvvvvvv7LvvvvvL7vvL7vvvvvvv7v7vvL7v7v77r77L5E0OBBEE8@B@B@BB8BB@B@@@B@B@B@B@OE1Lii;7777v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvvvLvL7
+L7vLvLvLvLvLvvvLvvvvvvvv7vvv7v7vvvvv7v7v7v7v7v7vv7r7rr;7JPGMGGPqGOGqEBMMMBB@MMM@B@@@BBB@B@B@B@BMkLirr77v7v777v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvLvLv7
+J7YvLvLvLvLvLvLvLvLvvvLvL7v7vvv7L7vvv7v7v7v7v777vv2uL7qqqE@BBqSPOMBMGOBM@B@B@B@B@B@B@B@B@MMB@BBB@BELri7rv7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvLvL7LvLvL7
+LvLLvLvLvLvLvLvvvLvLvLvL7vvvvv7vvL7vvv7v7v7v7L7vvu5SXZBOPO80XP2q8@BMOMMBMBB@B@M@B@B@B@B@B@MBB@BMGMB@Ou;i;77v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7L7vvv7v7v7Lv7
+Y7LvLvLvLvLvLvLvLvvvv7LvLvv7vvLvv7v7vvv7v7vvLr77uFPNOM@MMOOq50M8MB@B@BBBMM@B@BBM@B@@@BBB@B@MBB@BBOZ0MBM1;ir777v7v77777v7v7v7v7v7v7v7v7v7v7v7v7v7L7vvL7
+L7LYvLvLvLvLvLvLvv7vvv7vvv7v7Lvv7vvL7v7v7v77r7U8M@B@B@B@MMB@8ZB@B@BBB@B@B@B@B@B@B@B@BBBBMBB@OMOM@@B8NEZ@BY:rr777777v7v7v777v7v7v7v7v7v7v7v7v7vvv7vvLv7
+J7LvLvLvLvLvvvLvLvLvLvLvv7Lvvvv7v7vvv7v77r7ruO@BBB@B@@BBBBBB@OEB@B@@@B@B@B@B@B@B@BBB@B@B@MBM@MMZ8M@@BGNSMBNii;77v77777v777v7v7v7v7v7v7v7v7v7v7v7vvLvL7
+LvLYLLvLvLvLvLvLvLvL7vvvvv7v7Lvv7vvv7v77i7vPB@B@MOMMB@B@ZMB@@OPBB@@@B@B@B@B@B@B@BBMBB@BBMBMMB@BBG0PBBM0NPMB@Yii7777v777v7v777v7vvv7v7v7v7v7v7v7v7vvLv7
+Y7YvLvLvLvLvLvL7LvL7v7vvvvv7v7v7v7v7v7rrL18B@OOMBOMOOB@BMM@B@BOM@MBB@B@BBB@B@B@B@B@B@B@B@MBOOOBBB8PPMBMkqEEB@Gr:rr7777v7v777v7v7v7v7v7v7v7v7v7v7vvvvL7
+L7LLvLvLvLvLvLvL7vvvvv7vvv7v7vvv7v7v7r75Z@B@BON@BMZME@B@GOB@BZBB@@B@B@B@B@B@B@B@B@B@BBM@B@MB8GNOMM8EEZMBFqkFM@B1ir77777v7v7v7v7v7v7v7v7v7v7v7v7v7vvvv7
+J7YvLvLvLvvvL7v7L7L7v7v7v7vvv7v7v7v7rvFG@B8B@OOB@G0MBO@BqG@@@OBB@B@B@@@B@B@B@MMB@BBM@BBMBB@M@OG0q880ZZNOM5XS5G@BXi77777777v777v7v7v7v7v7v7v7v7v7vvvvLr
+LvvLLLvLvL7LvLvvvL7L7v7v7v7v7v7v7v7rrFO@BMZ@MB0MBB8MOOB@NMB@B@B@B@B@B@B@B@B@BBB@M@BBMBBBMMMBM@MZXPEZXPGEZZ5X1qM@BFirr7777v7v7v777v7v7v7v7v7v7v7v7v7v77
+Y7YvLvLvvvLvvvvvv7vvv7v7v7v7v7v7v77ruZ@B@M@BMMPOBM@8EE@@MB@@@B@B@B@BBB@BBB@B@BBB@MBM@BBMBMMOBM@MGP08ZkqNZq0FNFNB@BJir7v7v7v777v777v7v7v7v7v7v7v7v7v7Lr
+v7vLvLvvvv7v7LvLvv7v7v7v7v7v7v7v7vrJO@BMBBBBZOqOMMMZ8MB@BB@@B@B@B@B@B@MBMBB@B@MMMBBMM@MBMBBBMMOBOOZOOG5XPNPq2kFMB@Mur77v777v777v777v7v7v7v7v7v7v7v7vv7
+L7Lvv7vvvvv7vvvvL7L7v7v7vvv7v7v77;vNBMBBBMME8q8MOMMOBB@B@B@B@B@B@B@MBBBMBMBMBMBBMOBBBM@MBMMMMOBZM8GqOM0kXXqqk1qP@MBZv777v7v7v7v7v777v7v7v7v7v7v7v7v7Lr
+v7vLvLvLvvvL7v7vvL7v7v7vvv7v7v77rrk@@@B@MMMOM8MBM@BBB@M@BBB@B@B@BBB@MBB@MBMBMBMBBM8BMBMMMMOO88ZOE8qEP8OEPXXXkq21Z@OOur77777v7v7v7v7v7v7v7v7v7v7v7v7vv7
+Y7LvLvL7vvLvv7L7vvL7v7v7v7v7v7vr71@BBB@BMO@OM0@B@@@B@BBB@M@B@M@BBMBB@MBB@MBMBM@MMMMNOMM888B8OZ0N8NEkqk0EGXFFXPSuXMBEZv777777v777v777v7v7v7v7v7v7v7v7vr
+L7vvvLvvvvvvvLvL7L7v7v7v7v7v7vr7JB@@M@MMM@MMO8B@B@BB@BMBMMM@@@B@MMM@M@M@BBMMMBM@OMOO0OGOEPOMZ8q0PEN0SPXqZZXSPPX558MO01r77v7v7v7v7v7v7v7v7v7v7v7v7v7v77
+Y7LvvvLvLvL7v7LvL7Lvv7v7v7v7v77r2B@MMB@B@MGNMB@@@B@MBM@MBGMB@BBMBMMBMOBMBMMMMBMOMOOGONGEEZ0EGqNXNXNE0XNkP0EkSSPF5XMOOPvr777777v7v777v7v7v7v7v7v7v7v7Lr
+L7vLvL7vvvvvvLvLvvvv7v7v7v7v777ruOMM8BBMOOMMB@B@B@BBM@MMMZM@B@MBMMMMM88MMMMMZOMMGGGGEGNZqZZkP008qqS0EqqNX08PFXXP1F0M8Xrr77777v7v777v7v7v7v7v7v7v7v7v77
+L7LvLvL7vvvvv7Lvv7vvv7v7v7v7777ruMBM@MBBOO@B@B@B@B@MMMMMBEO@BBBMM8MGMO8ZOOO8OE8OO000EEEq0k0qPqNPOqk1q0qqqXEZXkFqF1qMMX7r77v7v777v7v777v7v7v7v7v7v7v7Lr
+v7vLvvvv7Lvvvvvv7v7v7v7v7v7v77rrP@MBBBMBZB@@BBB@BBBMO@BMMZZMMBMMOGOOOMEEZZEOEGNGGO00qEqZPPPZ00kkk8qS5PPkkP2EPXSkPFFMB07r77777v7v777v7v7v7v7v7v7v7v7vv7
+Y7Lvv7vvvvL7v7v7v7v7v7v7v7v7v7rLM@BB@MMMOB@B@MBB@MBBMM@MO08MMMMOMOO8ZO8N00EqZ0EqEZE0qkE0EkXkE0NPSqGXFF0kXkk1GN0XXkk0BZvr77v7v77777v7v7v7v7v7v7v7v7vvLr
+v7vLvLvLvLvv7Lvv7v7v7L7v7v7v77rSB@B@BMMBBBOOM@8@M@MBBMMB008MM8ZMOMZOEG8GqEENPG0EXNPEqqS0EZkSPqOOkP0EkSP0XXSqFGXZX0qqMZ77rv777v7v7v777v7v7v7v7v7vvv7Lv7
+LrLvLvvvL7v7v7v7v7v7v7v7v7v7vrrYMBMMBOBOMOOOGMMqMMBMBMMM80k0Mq1UOMM8GE8GG0EPPq00EkNSE00S08NFqNEMGXqGE5kGEqqNGqEqE0ZqBML;7777v777v7v7v7v7v7v7v7v7vvvvvr
+v7vLvv7L7v7vvvvv7v7v7v7v7v7v77rPBBMMOMMOGM8OPFM82MOOOMM@ZXFU1XUv75ZMMZNEqGEESqNENEqEPZE050M05NPOB8q8NPS0ZGSNG8GOGqEOM87r777v777v7v7v7v7v7v7v7v7v7vvLv7
+LrLvv7vvL7v7vvv7v7v7v7v7v7v77rLqBBBMOOMOMOOkqYJOSu0EBMOM@E1Fu7v77r7YO@O0qFPENU12SkEEENGOG5N80qGO@BOEOXZZGOENMMMMMMN8@kvr7777v777v7v7v7v7v7v7v7v7v7v7Lr
+v7vLvvvv7v7v7v7v7v7v7v7v7v7v777SMBOMZ88O8ON1UJr75uLLvuuU5q1Luuv7r;iriJEBM177vL7777v1kqqOM@OZSNEMB@B@MONMEOG8M@MBM@OMBPr77v7v777v7v7v777v7v7v7v7v7v7vv7
+L7LvLvv7vvL7vvv7vvvvL7v7v7v7v7r78MOOM8O88X5YY77r77vr:,,.,,::iirii::::::r2Li..::.....:iLLLJEMMJriru08@B@MMGOMMBBM@M@O@G7r77v7v777v7v7v7v7v7v7v7v7v7v7Lr
+v7vv7v7v7vvvvv7vvL7Lvv7v7v7v7vrv0MMMMMMM02Yv7777rrii::::::::::::::....   ..                .ir.   .,iOB@BXX0EMMMOBMOZXi7777v777v7v7v7v7v7v7v7v7v7v7vvr
+L7LvLvL7Lvv7vvv7v7Lvv7v7v7v7v77vPOMMMMBGXv777r7rri:::::::::::,,,:......    .. . .                    .ru1:::jNGOMOOEqLrr7777v7v7v7v7v7v7v7v7v7v7v7vvvr
+L7vLvv7vvv7vvv7vvLvv7v7v7v7v77r7qBMBM@Mqv77777rrii:ir7i;::,,.. ......... . ..... . .                        :L100EX0kvr77v7v7v7v7v7v7v7v7v7v7v7v7v7vv7
+LrLvv7v7vvv7vvvvL7vvv7v7v7v7v7rLqM@M@BMuv7v77rr;7JSkPSk51Uu7r::..  .............. .         ,::ir;ii,       ..L0XXqPFr777777v77777v777v7v7v7v7v7v7vvLr
+v7vLvv7v7v7vvvvvvL7vvv7v7v7777r7uOB@M@GY7777rrrJXG8G0E0Z8MMOZZ0kJvi:.,.,........ ....,,;r7uSPGPk22UuLv:  ...  iONXqPU7777v777v7v7v777v7v777v777v7v7v77
+LrL7v7v7L7v7L7Lvv7L7v7v7v7v7777ruO@B@BZ7777rr;LFNFS5F5F1FSEEZ0OOG1u77i:,,.......,::iL2qZOMMOMOqUu7rrvYLi..... :EGXESLr77v7v777v777v7v7v7v7v7v7v7v7v7vr
+L7vLvv7vvv7L7v7v7L7v7v7v7v7v7777uZ@@M@q7r777rrr7riii::.....,,::iirr7rr;:::.....::rrrr7;ri:,.         ,,:....  ,GGZE5rL77777v7v7v7v777v7v7v7v7v7v7v7vv7
+LrLvLvv7v7v7v7vvvvv7v7v7v7v7v77rr5@B@B0rrr7rr;ri;ii::..         ..:::::::::...,,:::....                 ..... ,8ME1  .L7v777v7v7v7v7v777v7v7v7v7v7v7vr
+v7vL7L7v7v7v7v7v7vvv7v7v7v7v7v7r:LZ@B@Nr;7r7rrrrr;i:,::i:r::..   ..,::::,,,. ............,:r;rii:.   . ... .  ,OMZr., :Y777v77777v7v7v777v7v7v7v7v7v77
+LrLvv7v7v7vvL7v7v7vvLvv7v7v7v7772;JB@BEirrrr7rrrrir7PZSU@Z@Bk2iv: .,:::::.. . . ..,::,:r:GBB@1OLJZqi,.... . . :8Mu,:S:.Lv777v777v77777v7v7v7v7v7v7vvvr
+L7vv7v7L7v7vvv7v7v7vvL7v7v7v7vrYFii5M@qrrrrrrr;rr7vqMPi.12@@M: iBL ,:iii:..    .  .:,i01.iN@@@5  7qX:,.. . .  :OP  ,Ui Y7777777v7v7v7v777v7v7v7v7v7v77
+LrvvLvL7v7vvv7v7v7v7v7v7v7v7v7rUXii:jB0;rrrrr;rr7rLujYJi:JPui :.:7. :i;i:..        ,:i7rr,i77i  ....... . ... iE7  ,j,,Lv777v777v7v7v7v7v7v7v7v7v7v7Lr
+v7vv7v7v7v7v7v7v7v7v7vvv7v7v7vrJ0ri,:@Pi;7rr;r;rrr;rii:::. ..,.....,irii:,.        ....:::.            . ...  iE:  ::,vv77777v7v7v7v7v7v7v7v7v7v7v7v77
+L7Lvvvv7vvLvv7v7v7v7v7v7v7v7v7vrFYi,:BZirrrrri;iiiiii::,,.......,.,:iii::..     .    ............ .   . ..... vS, ..,vL77777v7v7v7v7v7v7v7v7v7v7v7v7vr
+L7vLvv7v7v7vvv7v7v7v7v7v7v7v7v77r2v::GOrirrr;riiii:i::,,,,......,,:::ii:,:.. . .     . ... .         . . ... .uY  .:YL7v777v777v7v777v7v7v7v7v7v7v7L77
+LrLvL7v7v7vvv7v7v7v7vvv7L7v7v7v777uiiS@Lirrrrii:i::::,:,,.,.,.,,:,::iii::,,......     . .......       . .....:7   .YY777v7v777v7v7v7v7v7v7v7v7v7v7vvLr
+v7vvvLvvvLvLvvvv7v7v7v7v7v7v7v7v777Liiqq;7rr;rii::::,,,,,,,,.,,:,::iirri::.,.... .   . . . . . .         . .,i..  7J777v7v77777v7v7v7v7v7v7v7v7vvvvv77
+L7LvL7v7v7Lvv7v7v7v7v7v7v7v7v7v7v7771LruLrr;;ii:i::,,.:.:,,.,.,,:::irrr:::,.... . . . . . .             ...,:.:. ;u7777777v7v7v7v7v7v7v7v7v7v7v7v7vvvr
+L7vL7v7Lvvvv7vvv7v7v7v7v7v7v7v7v7v777uY7v7rririi::::,,,,,,,,,,,::i;v77ii:,...  ........... . . .     . . ..:.   :2vv777777777v7v7v7v7v7v7v7v7v7v7v7vv7
+YrL7Lvvvv7v7v7vvv7vvv7v7v7v7v7v7v7v77ivLuv7rrii:i::::::,:,,,:,:,irL77r;:,....     .........   .       ... ,:. . .Lv7v777v7v7v7v7v7v7v7v7v7v7v7v7v7vvLr
+v7vLvLvL7vvL7vvv7v7v7v7v7v7v7v7v7v7vrr7vLY77rrii::::::::,,,,.:::rLrr::,:..           .......       . . ...,,    :J777v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvLv7
+Y7YvLvLvvvvvLvv7L7v7vvv7v7v7v7v7v7v7v7i:i:v7rrri;ii::::,,,,.,,:iL7i::i7ri,,....:7:.  .:....       ... ....,.. .iJ777v77777v7v7v7v7v7v7v7v7vvvvv7v7v7Lr
+v7vLvL7LvLvL7vvLvv7vvv7v7v7v7v7v7v7v7v77777Lrr;;ii::::,:,,.,...:rLr::72Fvrii:iiuSSr:.,......   .  .. .....:LvLYY7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7Lvvv7
+L7YvLvvvLvLvLvvvvvvvvvv7v7vvv7v7v7v7vvv7v7vv7;ri;ii::::,,,,.....:iv77i777i:::.,..,i:, . ....  . . .   ..,.;jLvv7v777v777v7v7v777v7v7v7v7v7v7v7vvvvLvL7
+L7vLvLvv7vvvvLvL7LvLvL7v7v7v7v7v7v7v777v7v7Lv7iriiii::::,:,,..,:,::;77ri:, ,:,       . . . . . . . . ....,7L77777v777v77777v7v7v7v7v7v7v7v7v7v7L7Lvv77
+LrLvvvLvv7LvL7v7vvLvLvv7v7v7v7v7v7v777v7v7v7L77;iiiii:::::,,:::,::::i::,.  ,i..     .   . .   . . .......:j7v777v7v7v7v7v7v7v7v777v7v7v7vvv7v7v7L7vvLr
+L7vLvvvvvv7L7vvv7L7L7v7v7v7v7Lvvvv7vvv7v7v7v7L7riiii::::::::::::::::::,,.  ::, . . ... . .   . . . ..... 7Lv7v7v777v7v7v7v777v7v7v7v7v7v7v7v7v7vvvvLv7
+Y7Lvvvv7L7v7v7Lvv7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vrriiii:::::::::::::::::::,  ,i:.     . .     . ......... :Jv7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7LvLvL7
+L7vL7vvL7LvvvvvL7vvv7v7v7v7v7vvv7L7v7v7v7v7v7vv7r;iiii:i:i::::::::::::,,.. ... .           . ...........7Y777v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvLvLvvvLL7
+L7LvL7Lvv7vvvvLvLvvvLvv7v7v7v7v7vvL7v7v7v7v7v7vv7rr;riiii:i:::::::::,:i:::i:.,,.:::.    ... ......,....ij7v777v7v7v7v7v7v7v7v7vvvvvvv7v7Lvv7vvv7L7LvL7
+v7LLvLvLvLvL7vvLvL7vvvvL7v7v7v7v7vvv7v7v7v7v7v7Lv7r7rriiiii:::i2SjLJU5FX52uu7vLvY22FJriUJi............:Jvv777v7v7v7v7v7v7v7v7v7v7v7v7v7vvLvvvv7L7vvLv7
+Y7LvLvLvvvvvv7vvvvvvL7Lvv7v7v7L7vvvvv7v7v7v7v7v7Lvvr7rrri:i:i::ivJ155uuLYv7ri::.,,,,::,.::,.,.,.,.,,.:Yvv777v777v7v7v7v7v7v7v7v7v7v7v7v7vvv7v7LvLvLvL7
+L7vLvLvL7L7L7LvvvLvL7LvLvvvvvLvv7vvLvv7vvv7v7v7v7Lvvr7r7;;ii::::,::rri:,.. .....         ..,,,,,,,.,:YLv7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7vvvvLvLvLv7
+Y7LvLvLvvvvvvvLvLvLvv7L7v7Lvvvv7vvv7vvvvLvv7vvv7v7LYL77r7r;ii:i:::::::i:i::::::::.. . ......,,,,,.,:jLv7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7v7LvLvLvL7
+L7LLvLvLvLvLvLvvvLvL7v7v7vvv7vvv7Lvv7LvLvv7v7v7v7v7L7v7777r7ii:i:i:i:iiiirr7rrii::.......,,,.:,:,:iuLv7v7v7v7v7v7v7v7v7v7v7v7vvvvv7L7L7L7v7v7LvLvLvLvv
+Y7YLLvLvLvLvvvv7vvLvLvLvvvvvvvL7v7vvv7v7v7v7v7v7v7L:75LvL777r;riiii:i::::::::::,,.,.........,,::i,i2Y7v7v7v7v7v7v7v7v7v7v7v7v7v7vvvvv7LvLvvvvvLvLvLvL7
+LvvLvLvLLLvvvLvL7L7vvvvvvLvLvv7v7vvv7vvLvv7v7v7L7Ji.EqrYLL777rrr;iii::::,,.... . ..... ......::i,. 7uL7v7v7v7v7v7v7vvv7L7v7vvvvv7LvvvLvL7v7LvLvLvLvLLv
+J7LvYvLvLvLvLvLvLvLvL7Lvvvv7v7v7v7L7vvv7v7vvv7v7LY..@Fr7vvjv7rr;rii::,,,,.,.. . .  .........:i:...  7jL7v7v7v7v7v7vvv7L7v7vvL7LvLvvvvvLvvvLvLvLvLvLvL7
+LvLYvLvLvLvLvLvLvvvLvvvvvvvLvL7LvvvLvLvvvv7v7v77Lr :Bjr7r7vYYLr7i;ii::,:,,........ .......,::, ..,.  JLv7v7v7v7v7v7v7v7v7v7v7vvL7vvvvvvLvLvLvLvLvLLLLv
+J7YLLLLvLvLvLvLvLvLvL7Lvv7vvvvLvLvLvLvL7vvv77rivk. :Mv7rr;rrLYL77irii::::,,,,.,.......:,:::,. ...,:  ,Yr77v7v7v7v7v7v7v7v7vvvvvvvvvvLvLvLvLvLvLvLvYLY7
+LvLYLYLLvLvLvLvLvLvvvLvLvLvLvLvLvLvv7v7v7v77ir0@v  ,0Jrri;i;i77Lvvrrrrii::::,:,,,,.::::i:,.. .....:  .G7ir7v7v7v7v7v7v7vvv7v7LvvvL7v7LvLvLvLvLvLvLLLL7
+Y7YvLvLLLLLLLvLvLvLvLvvvLvvvLvvvv7vvL7Lvv7;iuB@0 .. ukri;iiiiiirv7v7777r7;riii;iiirrri:........ ..L   @Bk7i;77v7v7v7vvL7v7LvvvL7LvvvLvLvLvLvLvLvLvYLJ7
+L7vLvLvLvLLLLLvLvLvLvvvLvLvLvLvL7L7Lvv7vriLMB@B. ,..:8Lii;iiiiirirrrir;77777rr;rii::,........... :k   ,@`
+
+let arr = [];
+let rows = str.split('\n');
+for(let i=0;i<rows.length;i++){
+    arr[i] = [];
+}
+const canvas = document.getElementById('canvas'), WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+const context = canvas.getContext("2d");
+let color = '#334455';
+window.onload = function(){
+    init();
+    draw();
+}
+function init(){
+    for(let i=0;i<rows.length;i++){
+        let cols = rows[i].split('');
+        for(let j=0;j<cols.length;j++){
+            if(/^\w+$/.test(cols[j])){
+                const rect = new Rect(j*7+7, i*10+10, color)
+                arr[i].push(rect)
+            }
+        }
+    }
+}
+function draw(){
+    context.clearRect(0, 0 , canvas.width, canvas.height);
+    for(let i=0;i<arr.length;i++){
+        for(let j=0;j<arr[i].length;j++){
+            drawRect(context, arr[i][j].x, arr[i][j].y, arr[i][j].color)
+        }
+    }
+}
+function Rect(x, y, color){
+    this.x = x;
+    this.y = y;
+    this.color = color;
+}
+function drawRect(ctx, x, y, color){
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, 7, 10);
+    ctx.closePath();
+    ctx.fill();
+}
+</script>
+</body>
+</html>
