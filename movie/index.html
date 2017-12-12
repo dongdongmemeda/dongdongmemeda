@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie-ES5</title>
+<style>
+body{overflow: hidden;margin: 0;padding: 0;}
+#canvas{background-color: #334455;transition: all 0.5s;}
+.mask{position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto;width: 100px;height: 100px;}
+#pause{width: 0;height: 0;border-top: 50px solid transparent;border-left: 100px solid #ccc;
+border-bottom: 50px solid transparent;cursor: pointer;}
+</style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="mask">
+        <div id="pause"></div>
+    </div>
+<script>
+const canvas = document.getElementById('canvas'), pause = document.getElementById('pause');
+const WIDTH = window.innerWidth, HEIGHT = window.innerHeight, CW = parseInt(WIDTH)/2, CY = parseInt(HEIGHT)/2;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+const context = canvas.getContext('2d');
+let circleArr = [];
+const maxR = 15, minR = 5, POINT = 30;
+window.onload = window.onresize = function(){
+    init();
+    pause.onclick = function(){
+        pause.style.display = 'none';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = '#ccc';
+        drawNum('3', 0);
+        drawNum('2', 1000);
+        drawNum('1', 2000);
+        setTimeout(function(){
+            clearCanvas();
+            context.fillStyle = 'rgba(255,255,255,0.5)';
+            setTimeout(function(){
+                let tom = setInterval(function(){
+                    clearCanvas();
+                    for(let i=0;i<POINT;i++){
+                        circleArr[i].x += circleArr[i].moveX
+                        circleArr[i].y += circleArr[i].moveY
+                        if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
+                        else if(circleArr[i].x<0){ circleArr[i].x = WIDTH }
+                        if(circleArr[i].y>HEIGHT){ circleArr[i].y = 0 }
+                        else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
+
+                        drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
+                    }
+                }, 20);
+                setTimeout(function(){
+                    clearInterval(tom)
+                    setInterval(function(){
+                        clearCanvas();
+                        for(let i=0;i<POINT;i++){
+                            circleArr[i].x += circleArr[i].moveX
+                            circleArr[i].y += circleArr[i].moveY
+                            if(circleArr[i].x>WIDTH){ circleArr[i].x = 0 }
+                            else if(circleArr[i].x<0){ circleArr[i].x = WIDTH }
+                            if(circleArr[i].y>HEIGHT){ circleArr[i].y = 0 }
+                            else if(circleArr[i].y<0){ circleArr[i].y = HEIGHT }
+
+                            drawCircle(context, circleArr[i].x, circleArr[i].y, circleArr[i].r);
+                            for(let j=0;j<POINT-i;j++){
+                                const A = Math.abs(circleArr[i+j].x - circleArr[i].x),
+                                    B = Math.abs(circleArr[i+j].y - circleArr[i].y),
+                                    lineLength = Math.sqrt(A*A + B*B),
+                                    C = POINT/lineLength-0.14,
+                                    lineOpacity = C > 0.15 ? 0.15 : C
+                                if(lineOpacity>0){
+                                    drawLine(context, circleArr[i].x, circleArr[i].y, circleArr[i+j].x, circleArr[i+j].y, lineOpacity)
+                                }
+                            }
+                        }
+                    }, 20);
+                }, 1000);
+            }, 500);
+        }, 3000);
+    }
+}
+function init(){
+    for(let i=0;i<POINT;i++){
+        let circle = new Circle(num(WIDTH, 0), num(HEIGHT, 0), num(maxR, minR), num(10, -10)/40, num(10, -10)/40);
+        circleArr.push(circle);
+    }  
+}
+function num(max,min){
+    return (Math.random()*(max-min)+min) | 0
+}
+function drawNum(str, t){
+    setTimeout(function() {
+        let timer = null, size = 20;
+        setTimeout(function(){
+            clearInterval(timer)
+        }, 1000)
+        timer = setInterval(function(){
+            clearCanvas();
+            context.font = `bold ${size}px Lucida Console, "微软雅黑"`;
+            context.fillText(str, CW, CY);
+            size += 8;
+        }, 20)
+    }, t);
+}
+function clearCanvas(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}
+function Circle(x, y, r, moveX, moveY){
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.moveX = moveX;
+    this.moveY = moveY;
+}
+function drawCircle(ctx, x, y, r, color){
+    ctx.beginPath();
+    ctx.fillStyle = color
+    ctx.arc(x, y, r, 0, 2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+}
+function drawLine(ctx, x1, y1, x2, y2, o){
+    ctx.beginPath()
+    ctx.strokeStyle = `rgba(255, 255, 255, ${o})`
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.closePath()
+    ctx.stroke()
+}
+</script>
+</body>
+</html>
